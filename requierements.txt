@@ -1,0 +1,15 @@
+django
+djangorestframework
+markdown
+django-filter
+mysqlclient
+pyyaml 
+ua-parser 
+user-agents 
+django-user-agents
+python-memcached
+mailchimp-marketing
+dj-database-url
+gunicorn
+psycopg2
+whitenoise
