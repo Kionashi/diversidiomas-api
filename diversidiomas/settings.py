@@ -90,9 +90,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT': '3306',
         'MODE': 'Strict',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
+        
     }
 }
 
