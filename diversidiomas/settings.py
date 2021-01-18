@@ -26,7 +26,7 @@ SECRET_KEY = '&l9sy$3j#2#e46*%52sxsdq32+irtkbr#s*ovl+-#4!sv1n5ea'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['diversidiomasapi.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
