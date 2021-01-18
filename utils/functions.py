@@ -1,6 +1,8 @@
 import random
 import string
 
+PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
+
 def randomString(stringLength=10, mode='uppercase'):
     """Generate a random string of fixed length """
     if(mode == 'uppercase'):
