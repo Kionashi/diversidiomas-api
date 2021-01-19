@@ -1,6 +1,7 @@
 django
 djangorestframework
 markdown
+django-environ
 django-filter
 mysqlclient
 pyyaml 
@@ -14,3 +15,4 @@ gunicorn
 psycopg2
 whitenoise
 django-cors-headers
+sendgrid

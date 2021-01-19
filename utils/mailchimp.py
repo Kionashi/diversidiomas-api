@@ -1,4 +1,6 @@
-""" Mailchimp wwrapper to simplify the main functions of the API"""
+""" Mailchimp wrapper to simplify the main functions of the API"""
+import os
+
 # Django
 from django.conf import settings
 
@@ -9,9 +11,9 @@ from mailchimp_marketing.api_client import ApiClientError
 # Utils
 import hashlib
 
-API_KEY = settings.MAILCHIMP_API_KEY
-SERVER = settings.MAILCHIMP_SERVER
-NEWSLETTER_LIST_ID = settings.MAILCHIMP_NEWSLETTER_LIST_ID
+API_KEY = os.environ.get('MAILCHIMP_API_KEY')
+SERVER = os.environ.get('MAILCHIMP_SERVER')
+NEWSLETTER_LIST_ID = os.environ.get('MAILCHIMP_NEWSLETTER_LIST_ID')
 
 def subscribe_to_list(list_id, email, merge_fields={}):
     """ Adds a contact/member to a given mailchimp audience/list """

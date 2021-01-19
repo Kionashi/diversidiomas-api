@@ -12,21 +12,25 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Environ init
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&l9sy$3j#2#e46*%52sxsdq32+irtkbr#s*ovl+-#4!sv1n5ea'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG',default=False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS',default=[]))
 
 
 # Application definition
@@ -83,12 +87,12 @@ WSGI_APPLICATION = 'diversidiomas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'diversidiomas',
-        'USER': 'admin',
-        'PASSWORD': '48Prelipo.',
-        'HOST':'localhost',
-        'PORT': '3306',
+        'ENGINE': env.str('DB_ENGINE',default='django.db.backends.mysql'),
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER', default='root'),
+        'PASSWORD': env.str('DB_PASSWORD', default=''),
+        'HOST':env.str('DB_HOST', default='localhost'),
+        'PORT': env.str('DB_PORT',default='3306'),
         'MODE': 'Strict',
         
     }
@@ -147,9 +151,14 @@ CACHES = {
 # cache alias will be used. Set to `None` to disable caching.
 USER_AGENTS_CACHE = 'default'
 
-MAILCHIMP_API_KEY='a63d448276d8938288492ef0cc14c1d4-us7'
-MAILCHIMP_SERVER='us7'
-MAILCHIMP_NEWSLETTER_LIST_ID='7250c51a3d'
+MAILCHIMP_API_KEY=env.str('MAILCHIMP_API_KEY')
+MAILCHIMP_SERVER=env.str('MAILCHIMP_SERVER')
+MAILCHIMP_NEWSLETTER_LIST_ID=env.str('MAILCHIMP_NEWSLETTER_LIST_ID')
+
+# Sendgrid credentials
+
+SENDGRID_API_KEY=env.str('SENDGRID_API_KEY')
+SENDGRID_CONTACT_TEMPLATE= env.str('SENDGRID_CONTACT_TEMPLATE')
 
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)
