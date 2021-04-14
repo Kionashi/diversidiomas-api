@@ -16,3 +16,4 @@ psycopg2
 whitenoise
 django-cors-headers
 sendgrid
+sib_api_v3_sdk

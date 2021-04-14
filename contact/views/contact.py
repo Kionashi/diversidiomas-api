@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 import string
 import random
 from utils.sendgrid import *
+from utils.sendinblue import send_contact_email
 
 @api_view(['POST'])
 def send_contact(request):
@@ -17,6 +18,6 @@ def send_contact(request):
         'email' : request.data['email'],
         'message' : request.data['message'],
     }    
-    result = send_contact_form_email(data)
+    result = send_contact_email(data)
     
     return Response(data, status=status.HTTP_201_CREATED)
