@@ -8,7 +8,7 @@ from utils.models import BaseModel
  
 class NewsletterContact(BaseModel):
     """ Newsletter contact model. """
-    email = models.EmailField(name="email", max_length=50, unique=True)
+    email = models.EmailField(name="email", max_length=50) #it must be unique
     ip_address = models.CharField(max_length=20, null=True, blank=True)
     user_agent = models.CharField(max_length=50, null=True, blank=True)
     class NewsletterContactStatus(models.TextChoices):

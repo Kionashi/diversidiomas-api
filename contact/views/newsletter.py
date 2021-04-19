@@ -31,24 +31,24 @@ class NewsletterViewset(viewsets.ModelViewSet):
         """ Validates the data from the request and calls perform_create """
         print('====REGULAR CREATE=====')
         serializer = self.get_serializer(data=request.data)
-        is_valid = serializer.is_valid()
+        is_valid = serializer.is_valid(raise_exception=True)
         result = False
-        try: 
+        # try: 
             # Find if the contact already exist, if found, makes sure it's status is ACTIVE
             print('==Check if the contact already exist==')
-            contact = NewsletterContact.objects.get(email=request.data['email'])
+            # contact = NewsletterContact.objects.get(email=request.data['email'])
             print('==It exists, so I change its status to ACTIVE==')
-            contact.status = NewsletterContact.NewsletterContactStatus.ACTIVE
-            contact.save()
+            # contact.status = NewsletterContact.NewsletterContactStatus.ACTIVE
+            #contact.save()
             # reactivate that email from the newsletter list
-            result = resubscribe_to_newsletter(contact.email)
-        except NewsletterContact.DoesNotExist:
+            # result = resubscribe_to_newsletter(contact.email)
+        # except NewsletterContact.DoesNotExist:
             print('==Does not exist==')
             # The contact doesn't exist on the DB, so I create a new one
             print('==Checking if is valid==')
-            serializer.is_valid(raise_exception=True)
+            # serializer.is_valid(raise_exception=True)
             print('== Is valid so I create a new contact')
-            result = self.perform_create(serializer)
+        result = self.perform_create(serializer)
         
         if result is not True:
             return Response(json.loads(result), status=status.HTTP_400_BAD_REQUEST)
@@ -63,18 +63,18 @@ class NewsletterViewset(viewsets.ModelViewSet):
         result = subscribe_to_newsletter(email)
         if result is not True:
             return result
-        print(':::::PERFORM CREATE::::::')
-        ip_address = get_client_ip(self.request._request)
-        user_agent = get_user_agent(self.request)
-        print(ip_address)
-        print(user_agent)
-        # print('=======USER AGENT!=========')
+        # print(':::::PERFORM CREATE::::::')
+        # ip_address = get_client_ip(self.request._request)
         # user_agent = get_user_agent(self.request)
-        print('========================')
-        serializer.validated_data['user_agent'] = user_agent
-        serializer.validated_data['ip_address'] = ip_address
-        # serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # print(ip_address)
+        # print(user_agent)
+        # # print('=======USER AGENT!=========')
+        # # user_agent = get_user_agent(self.request)
+        # print('========================')
+        # serializer.validated_data['user_agent'] = user_agent
+        # serializer.validated_data['ip_address'] = ip_address
+        # # serializer.is_valid(raise_exception=True)
+        # #serializer.save()
         return True
 
 
@@ -91,7 +91,7 @@ class NewsletterViewset(viewsets.ModelViewSet):
             return Response(data, status=status.HTTP_404_NOT_FOUND)        
         
         contact.status = NewsletterContact.NewsletterContactStatus.INACTIVE
-        contact.save() 
+        #contact.save() 
         result = unsubscribe_from_newsletter(contact.email)
         if result is not True:
             return Response(json.loads(result), status=status.HTTP_400_BAD_REQUEST)
