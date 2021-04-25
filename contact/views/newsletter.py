@@ -35,19 +35,19 @@ class NewsletterViewset(viewsets.ModelViewSet):
         result = False
         # try: 
             # Find if the contact already exist, if found, makes sure it's status is ACTIVE
-            print('==Check if the contact already exist==')
+            # print('==Check if the contact already exist==')
             # contact = NewsletterContact.objects.get(email=request.data['email'])
-            print('==It exists, so I change its status to ACTIVE==')
+            # print('==It exists, so I change its status to ACTIVE==')
             # contact.status = NewsletterContact.NewsletterContactStatus.ACTIVE
             #contact.save()
             # reactivate that email from the newsletter list
             # result = resubscribe_to_newsletter(contact.email)
         # except NewsletterContact.DoesNotExist:
-            print('==Does not exist==')
+            # print('==Does not exist==')
             # The contact doesn't exist on the DB, so I create a new one
-            print('==Checking if is valid==')
+            # print('==Checking if is valid==')
             # serializer.is_valid(raise_exception=True)
-            print('== Is valid so I create a new contact')
+            # print('== Is valid so I create a new contact')
         result = self.perform_create(serializer)
         
         if result is not True:
