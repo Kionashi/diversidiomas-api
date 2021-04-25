@@ -87,6 +87,10 @@ WSGI_APPLICATION = 'diversidiomas.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'mysql': {
         'ENGINE': env.str('DB_ENGINE',default='django.db.backends.mysql'),
         'NAME': env.str('DB_NAME'),
         'USER': env.str('DB_USER', default='root'),
@@ -95,7 +99,8 @@ DATABASES = {
         'PORT': env.str('DB_PORT',default='3306'),
         'MODE': 'Strict',
         
-    }
+    },
+    
 }
 
 
