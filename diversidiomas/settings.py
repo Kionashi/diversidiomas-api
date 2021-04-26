@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG',default=False)
 
-ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS',default=[]))
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -89,17 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'mysql': {
-        'ENGINE': env.str('DB_ENGINE',default='django.db.backends.mysql'),
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER', default='root'),
-        'PASSWORD': env.str('DB_PASSWORD', default=''),
-        'HOST':env.str('DB_HOST', default='localhost'),
-        'PORT': env.str('DB_PORT',default='3306'),
-        'MODE': 'Strict',
-        
-    },
+    }
     
 }
 
